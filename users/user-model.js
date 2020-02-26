@@ -1,12 +1,12 @@
 const db = require('../data/db-config.js');
 
 function find() {
-	return db('users').select('id', 'username');
+	return db('users').select('id', 'email');
 }
 
 function findBy(filter) {
 	return db('users')
-		.select('id', 'username', 'password')
+		.select('id', 'email', 'password')
 		.where(filter);
 }
 
@@ -21,7 +21,7 @@ function add(user) {
 
 function findById(id) {
   return db('users')
-    .select('id', 'username')
+    .select('id', 'email')
     .where({ id })
     .first();
 }
