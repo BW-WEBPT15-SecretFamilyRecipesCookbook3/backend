@@ -1,11 +1,12 @@
 {
-  "name": "Secret Family Recipes",
+  "name": "Recipes",
   "version": "1.0.0",
-  "description": "- Authentication.\r - Express Middleware.\r - JSON Web Tokens (JWTs).\r - Hashing Passwords.",
+  "description": "A place to store family recipes.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
