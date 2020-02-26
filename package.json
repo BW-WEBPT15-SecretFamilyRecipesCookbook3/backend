@@ -1,5 +1,5 @@
 {
-  "name": "node-auth3-project",
+  "name": "Secret Family Recipes",
   "version": "1.0.0",
   "description": "- Authentication.\r - Express Middleware.\r - JSON Web Tokens (JWTs).\r - Hashing Passwords.",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/garybot/node-auth3-project.git"
+    "url": "git+https://github.com/BW-WEBPT15-SecretFamilyRecipesCookbook3/backend.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gary Anthony James Porter",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/garybot/node-auth3-project/issues"
+    "url": "https://github.com/BW-WEBPT15-SecretFamilyRecipesCookbook3/backend/issues"
   },
-  "homepage": "https://github.com/garybot/node-auth3-project#readme",
+  "homepage": "https://github.com/BW-WEBPT15-SecretFamilyRecipesCookbook3/backend#readme",
   "devDependencies": {
     "nodemon": "^2.0.2"
   },
