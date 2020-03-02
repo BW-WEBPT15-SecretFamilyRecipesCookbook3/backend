@@ -1,13 +1,13 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('recipes').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('recipes').insert([
+        {recipe_name: 'Pound Cake', description: "A delicious cake named for the measurements of its four ingredients"},
+        {recipe_name: 'PB&J', description: "A classic, and for good reason."},
+        {recipe_name: 'Gohan', description: "Cooked rice. A foundation for a great meal."}
       ]);
     });
 };

@@ -13,3 +13,9 @@
 | :----- | :------------: | :------------: | :------------: |
 | GET    |   /api/users   |      N/A       |      N/A       |
 | DELETE | /api/users/:id |      N/A       |      N/A       |
+
+# Recipes
+
+| Method |    Endpoint    | Body(required) | Body(optional) |
+| :----- | :------------: | :------------: | :------------: |
+| GET    |  /api/recipes  |      N/A       |      N/A       |
