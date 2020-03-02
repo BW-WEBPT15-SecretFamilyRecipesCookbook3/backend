@@ -16,6 +16,7 @@
 
 # Recipes
 
-| Method |    Endpoint    | Body(required) | Body(optional) |
-| :----- | :------------: | :------------: | :------------: |
-| GET    |  /api/recipes  |      N/A       |      N/A       |
+| Method |    Endpoint    |   Body(required)  | Body(optional) |
+| :----- | :------------: | :---------------: | :------------: |
+| GET    |  /api/recipes  |        N/A        |      N/A       |
+| POST    | /api/recipes  | name, description |      N/A       |
