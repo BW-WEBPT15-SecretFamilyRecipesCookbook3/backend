@@ -24,4 +24,20 @@ if (req.body.recipe_name && req.body.description && req.body.source) {
 }
 })
 
+router.get('/:id/steps', async (req, res) => {
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    console.log(recipe);
+    if (recipe) {
+      const steps = await Recipes.getInstructions(req.params.id);
+      console.log(steps);
+      res.status(200).json(steps);
+    } else {
+      res.status(404).json({ message: "There is no recipe with that ID." });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+})
+
 module.exports = router;

@@ -15,10 +15,11 @@ function find() {
 
 function findById(id) {
   return db("recipes as r")
-    .join("recipe_ingredients as ri")
-    .join("units as u")
-    .join("ingredients as i")
-    .select("r.id", "r.name", "r.description");
+    // .join("recipe_ingredients as ri")
+    // .join("units as u")
+    // .join("ingredients as i")
+    // .select("r.id", "r.name", "r.description")
+    .where({ id })
 }
 
 function getIngredients(recipe_id) {
@@ -59,7 +60,8 @@ module.exports = {
   findById,
   getIngredients,
   getInstructions,
-  addRecipe
+  addRecipe,
+  // addIngredient,
   // update,
   // remove,
 };
