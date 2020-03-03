@@ -36,6 +36,10 @@ function getInstructions(recipe_id) {
     .orderBy("steps.step_number");
 }
 
+function getCategories() {
+  return db('categories');
+}
+
 async function addRecipe(recipe) {
   const recipeData = {
     recipe_name: recipe.recipe_name,
@@ -60,6 +64,7 @@ module.exports = {
   findById,
   getIngredients,
   getInstructions,
+  getCategories,
   addRecipe,
   // addIngredient,
   // update,

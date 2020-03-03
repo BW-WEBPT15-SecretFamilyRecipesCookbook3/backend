@@ -1,9 +1,7 @@
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex('recipes').del()
     .then(function () {
-      // Inserts seed entries
       return knex('recipes').insert([
         {recipe_name: 'Pound Cake', description: "A delicious cake named for the measurements of its four ingredients", source: "England"},
         {recipe_name: 'PB&J', description: "A classic, and for good reason.", source: "Primary School"},

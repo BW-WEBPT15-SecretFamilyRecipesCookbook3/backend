@@ -40,4 +40,30 @@ router.get('/:id/steps', async (req, res) => {
   }
 })
 
+router.get('/:id/ingredients', async (req, res) => {
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    console.log(recipe);
+    if (recipe) {
+      const list = await Recipes.getIngredients(req.params.id);
+      console.log(list);
+      res.status(200).json(list);
+    } else {
+      res.status(404).json({ message: "There is no recipe with that ID." });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+})
+
+router.get('/categories', (req, res) => {
+  Recipes.getCategories()
+    .then(list => {
+      res.status(200).json(list);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to retrive categories." });
+    })
+})
+
 module.exports = router;
