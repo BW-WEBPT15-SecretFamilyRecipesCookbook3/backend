@@ -11,13 +11,17 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  Recipes.add(req.body)
+if (req.body.recipe_name && req.body.description && req.body.source) {
+  Recipes.addRecipe(req.body)
     .then(added => {
-      res.status(201).json({ message: "Successfully added a recipe!" });
+      res.status(201).json({ message: "Successfully added a recipe!", recipe_id: added });
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to add recipe.", error: err });
-    })
+    });
+} else {
+  res.status(400).json({ message: "Missing required field(s)." });
+}
 })
 
 module.exports = router;

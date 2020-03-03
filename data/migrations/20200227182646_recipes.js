@@ -7,6 +7,7 @@ exports.up = function(knex) {
         .notNullable()
         .unique();
       tbl.string("description").notNullable();
+      tbl.string("source").notNullable();
       // tbl.string('category');
       // tbl.integer('category_id').notNullable().references('categories.id');
     })
