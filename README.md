@@ -19,8 +19,8 @@
 | Method |      Endpoint      |       Body(required)      | Body(optional) |
 | :----- | :----------------: | :-----------------------: | :------------: |
 | GET    |  /api/recipes      |            N/A            |      N/A       |
-| POST   |  /api/recipes      |     title, description, source     |    category    |
-| PUT    |  /api/recipes/:id  |     title, description, source     |    category    |
+| POST   |  /api/recipes      |     title, description, source     |    tag    |
+| PUT    |  /api/recipes/:id  |     title, description, source     |    tag    |
 | DELETE |  /api/recipes/:id  |            N/A            |      N/A       |
 
 # Ingredients (TODO)
