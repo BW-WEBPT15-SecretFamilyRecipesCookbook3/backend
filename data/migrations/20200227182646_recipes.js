@@ -3,7 +3,7 @@ exports.up = function(knex) {
     .createTable("recipes", tbl => {
       tbl.increments();
       tbl
-        .string("recipe_name", 128)
+        .string("title", 128)
         .notNullable()
         .unique();
       tbl.string("description").notNullable();
@@ -11,17 +11,17 @@ exports.up = function(knex) {
       // tbl.string('category');
       // tbl.integer('category_id').notNullable().references('categories.id');
     })
-    .createTable("categories", tbl => {
+    .createTable("tags", tbl => {
       tbl.increments();
-      tbl.string("category_name");
+      tbl.string("tag");
     })
     .createTable("units", tbl => {
       tbl.increments();
-      tbl.string("unit_name", 128).notNullable();
+      tbl.string("unit", 128).notNullable();
     })
     .createTable("ingredients", tbl => {
       tbl.increments();
-      tbl.string("ingredient_name", 128).notNullable();
+      tbl.string("ingredient", 128).notNullable();
     })
     .createTable("recipe_ingredients", tbl => {
       tbl
@@ -58,7 +58,7 @@ exports.up = function(knex) {
       tbl.integer("step_number").notNullable();
       tbl.string("instructions", 128).notNullable();
     })
-    .createTable("recipe_categories", tbl => {
+    .createTable("recipe_tags", tbl => {
       tbl
         .integer("recipe_id")
         .unsigned()
@@ -67,13 +67,13 @@ exports.up = function(knex) {
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
       tbl
-        .integer("category_id")
+        .integer("tag_id")
         .unsigned()
         .notNullable()
-        .references("categories.id")
+        .references("tags.id")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl.primary(["recipe_id", "category_id"]);
+      tbl.primary(["recipe_id", "tag_id"]);
     });
 };
 
@@ -84,6 +84,6 @@ exports.down = function(knex) {
     .dropTableIfExists("recipe_ingredients")
     .dropTableIfExists("ingredients")
     .dropTableIfExists("units")
-    .dropTableIfExists("categories")
+    .dropTableIfExists("tags")
     .dropTableIfExists("recipes");
 };

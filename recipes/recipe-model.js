@@ -1,15 +1,15 @@
 const db = require("../data/db-config.js");
 
 function find() {
-  return db("recipe_categories as rc")
+  return db("recipe_tags as rt")
     .join("recipes as r", "recipe_id", "r.id")
-    .join("categories as c", "category_id", "c.id")
+    .join("tags as t", "tag_id", "t.id")
     .select(
       "r.id",
-      "r.recipe_name",
+      "r.title",
       "r.description",
       "r.source",
-      "c.category_name"
+      "t.tag"
     );
 }
 
@@ -26,7 +26,7 @@ function getIngredients(recipe_id) {
   return db("recipe_ingredients as ri")
     .join("ingredients as i", "ri.ingredient_id", "i.id")
     .join("units as u", "ri.unit_id", "u.id")
-    .select("i.ingredient_name", "u.unit_name", "ri.quantity")
+    .select("i.ingredient", "u.unit", "ri.quantity")
     .where({ recipe_id: recipe_id });
 }
 
@@ -36,24 +36,24 @@ function getInstructions(recipe_id) {
     .orderBy("steps.step_number");
 }
 
-function getCategories() {
-  return db('categories');
+function getTags() {
+  return db('tags');
 }
 
 async function addRecipe(recipe) {
   const recipeData = {
-    recipe_name: recipe.recipe_name,
+    title: recipe.title,
     description: recipe.description,
     source: recipe.source
   };
   const [recipe_id] = await db("recipes").insert(recipeData);
-  if (recipe.category) {
-    const [category] = await db("categories")
+  if (recipe.tag) {
+    const [tag] = await db("tags")
       .select("id")
-      .where("category_name", recipe.category);
-    await db("recipe_categories").insert({
+      .where("tag", recipe.tag);
+    await db("recipe_tags").insert({
       recipe_id: recipe_id,
-      category_id: category.id
+      tag_id: tag.id
     });
   }
   return recipe_id;
@@ -64,7 +64,7 @@ module.exports = {
   findById,
   getIngredients,
   getInstructions,
-  getCategories,
+  getTags,
   addRecipe,
   // addIngredient,
   // update,
