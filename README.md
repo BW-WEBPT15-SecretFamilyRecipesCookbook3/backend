@@ -19,8 +19,8 @@
 | Method |      Endpoint      |       Body(required)      | Body(optional) |
 | :----- | :----------------: | :-----------------------: | :------------: |
 | GET    |  /api/recipes      |            N/A            |      N/A       |
-| POST   |  /api/recipes      |     name, description     |    category    |
-| PUT    |  /api/recipes/:id  |     name, description     |    category    |
+| POST   |  /api/recipes      |     title, description, source     |    category    |
+| PUT    |  /api/recipes/:id  |     title, description, source     |    category    |
 | DELETE |  /api/recipes/:id  |            N/A            |      N/A       |
 
 # Ingredients (TODO)
@@ -28,7 +28,7 @@
 | Method |              Endpoint              |        Body(required)       | Body(optional) |
 | :----- | :--------------------------------: | :-------------------------: | :------------: |
 | GET    |  /api/recipes/:id/ingredients      |             N/A             |      N/A       |
-| POST   |  /api/recipes/:id/ingredients      |     name, unit, quantity    |      N/A   
+| POST   |  /api/recipes/:id/ingredients      |     ingredient, unit, quantity    |      N/A   
 <!-- | PUT    |  /api/recipes/:id/ingredients/:id  |     name, unit, quantity    |      N/A       | -->
 | DELETE |  /api/recipes/:id/ingredients/:id  |             N/A             |      N/A       |
 
@@ -39,12 +39,12 @@
 | :----- | :--------------------------: | :-------------------------: | :------------: |
 | GET    |  /api/recipes/:id/steps      |             N/A             |      N/A       |
 | POST   |  /api/recipes/:id/steps      |  step_number, instructions  |      N/A   
-| PUT    |  /api/recipes/:id/steps/:num |         instructions        |      N/A       |
-| DELETE |  /api/recipes/:id/steps/:num |             N/A             |      N/A       |
+| PUT    |  /api/recipes/:id/steps/:sid |         instructions        |      N/A       |
+| DELETE |  /api/recipes/:id/steps/:sid |             N/A             |      N/A       |
 
-# Categories (TODO)
+# Tags (TODO)
 
 | Method |         Endpoint        |    Body(required)   | Body(optional) |
 | :----- | :---------------------: | :-----------------: | :------------: |
-| GET    | /api/recipes/categories |         N/A         |      N/A       |
-| POST   | /api/recipes/categories |         name        |      N/A       |
+| GET    | /api/recipes/tags |         N/A         |      N/A       |
+| POST   | /api/recipes/tags |         tag        |      N/A       |
