@@ -19,10 +19,12 @@ function find() {
 
 function findById(id) {
   return db("recipes as r")
-    // .join("recipe_ingredients as ri")
+    .join("recipe_ingredients as ri", function() {
+      this.on('r.id', '=', 'ri.recipe_id')
+    })
     // .join("units as u")
     // .join("ingredients as i")
-    // .select("r.id", "r.name", "r.description")
+    .select("r.id", "r.title", "r.description")
     .where({ id })
 }
 
@@ -50,6 +52,13 @@ function getInstructions(recipe_id) {
   return db("steps")
     .where({ recipe_id: recipe_id })
     .orderBy("steps.step_number");
+}
+
+function getRecipeTags(recipe_id) {
+  return db('recipe_tags')
+    .join('tags', 'id', '=', 'recipe_tags.tag_id')
+    .select('tag')
+    .where({recipe_id});
 }
 
 function getTags() {
@@ -123,6 +132,7 @@ module.exports = {
   getIngredients,
   getInstructions,
   getTags,
+  getRecipeTags,
   addRecipe,
   addRecipeIngredient,
   addRecipeTag,

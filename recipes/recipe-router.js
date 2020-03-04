@@ -39,9 +39,16 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Failed to add recipe.", error: err });
   }
-
-
-})
+});
+// 
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const recipe = await Recipes.findById(req.params.id);
+//     res.status(200).json(recipe);
+//   } catch (err) {
+//     res.status(500),json(err);
+//   }
+// });
 
 router.get('/:id/steps', async (req, res) => {
   try {
@@ -57,7 +64,7 @@ router.get('/:id/steps', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err });
   }
-})
+});
 
 router.get('/:id/ingredients', async (req, res) => {
   try {
@@ -65,6 +72,21 @@ router.get('/:id/ingredients', async (req, res) => {
     if (recipe) {
       const list = await Recipes.getIngredients(req.params.id);
       res.status(200).json(list);
+    } else {
+      res.status(404).json({ message: "There is no recipe with that ID." });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
+
+router.get('/:id/tags', async (req, res) => {
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    if (recipe) {
+      const list = await Recipes.getRecipeTags(req.params.id);
+      const tags = list.map(item => item.tag);
+      res.status(200).json(tags);
     } else {
       res.status(404).json({ message: "There is no recipe with that ID." });
     }
