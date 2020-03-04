@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: "Failed to add recipe.", error: err });
   }
 });
-// 
+//
 // router.get('/:id', async (req, res) => {
 //   try {
 //     const recipe = await Recipes.findById(req.params.id);
@@ -53,10 +53,8 @@ router.post('/', async (req, res) => {
 router.get('/:id/steps', async (req, res) => {
   try {
     const recipe = await Recipes.findById(req.params.id);
-    console.log(recipe);
     if (recipe) {
       const steps = await Recipes.getInstructions(req.params.id);
-      console.log(steps);
       res.status(200).json(steps);
     } else {
       res.status(404).json({ message: "There is no recipe with that ID." });
@@ -93,7 +91,7 @@ router.get('/:id/tags', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err });
   }
-})
+});
 
 router.get('/tags', (req, res) => {
   Recipes.getTags()
@@ -102,7 +100,18 @@ router.get('/tags', (req, res) => {
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to retrive categories." });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  Recipes.removeRecipe(req.params.id)
+    .then(deleted => {
+      res.status(200).json(deleted);
     })
-})
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 
 module.exports = router;

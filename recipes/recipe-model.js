@@ -73,6 +73,10 @@ async function addRecipe(recipe) {
   }
 }
 
+function removeRecipe(id) {
+  return db('recipes').where({ id }).del();
+}
+
 async function addStep(step) {
   try {
     return await db('steps').insert(step)
@@ -138,6 +142,7 @@ module.exports = {
   addRecipeTag,
   addStep,
   findUnitByName,
+  removeRecipe,
   // addIngredient,
   // update,
   // remove,

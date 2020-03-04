@@ -8,8 +8,6 @@ exports.up = function(knex) {
         .unique();
       tbl.string("description").notNullable();
       tbl.string("source").notNullable();
-      // tbl.string('category');
-      // tbl.integer('category_id').notNullable().references('categories.id');
     })
     .createTable("tags", tbl => {
       tbl.increments();
@@ -54,7 +52,9 @@ exports.up = function(knex) {
         .integer("recipe_id")
         .unsigned()
         .notNullable()
-        .references("recipes.id");
+        .references("recipes.id")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
       tbl.integer("step_number").notNullable();
       tbl.string("instructions", 128).notNullable();
     })
