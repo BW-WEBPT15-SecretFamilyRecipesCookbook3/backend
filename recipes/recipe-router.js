@@ -10,18 +10,37 @@ router.get('/', (req, res) => {
     .catch(err => res.send(err));
 });
 
-router.post('/', (req, res) => {
-if (req.body.title && req.body.description && req.body.source) {
-  Recipes.addRecipe(req.body)
-    .then(added => {
-      res.status(201).json({ message: "Successfully added a recipe!", recipe_id: added });
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to add recipe.", error: err });
+router.post('/', async (req, res) => {
+  if (!req.body.title || !req.body.source || !req.body.description || !req.body.directions || !req.body.ingredients || !req.body.tags) {
+   res.status(400).json({ message: "Missing required field(s)." });
+  }
+  try {
+    const recipe = {
+      title: req.body.title,
+      description: req.body.description,
+      source: req.body.source
+    };
+
+    const [added] = await Recipes.addRecipe(recipe);
+    req.body.ingredients.forEach((ingredient) => {
+      Recipes.addRecipeIngredient(added, ingredient);
     });
-} else {
-  res.status(400).json({ message: "Missing required field(s)." });
-}
+
+    req.body.directions.forEach(step => {
+      step.recipe_id = added;
+      Recipes.addStep(step);
+    });
+
+    req.body.tags.forEach((tag) => {
+      Recipes.addRecipeTag(added, tag);
+    });
+
+    res.status(200).json({ message: "It's working!" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to add recipe.", error: err });
+  }
+
+
 })
 
 router.get('/:id/steps', async (req, res) => {
