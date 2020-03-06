@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
       step.recipe_id = added;
       Recipes.addStep(step);
     });
-    //
+    // Support for tags
     // req.body.tags.forEach((tag) => {
     //   Recipes.addRecipeTag(added, tag);
     // });
@@ -40,6 +40,22 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: "Failed to add recipe.", error: err });
   }
 });
+
+router.put('/:id', (req, res) => {
+  const values = req.body;
+  if (values.title && values.description && values.source) {
+    Recipes.updateRecipe(req.params.id, req.body)
+      .then(updated => {
+        res.status(200).json({ message: "Successfully updated recipe." });
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      })
+  } else {
+    res.status(400).json({ message: "Missing required field(s)." });
+  }
+})
+
 //
 // router.get('/:id', async (req, res) => {
 //   try {

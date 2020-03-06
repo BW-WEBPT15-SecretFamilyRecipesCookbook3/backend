@@ -167,6 +167,10 @@ function removeStep(id) {
   return db('steps').where({ id }).del();
 }
 
+function updateRecipe(id, values) {
+  return db('recipes').where({ id }).update(values);
+}
+
 module.exports = {
   find,
   findById,
@@ -183,6 +187,7 @@ module.exports = {
   removeIngredient,
   removeStep,
   removeRecipeTag,
+  updateRecipe,
   // addIngredient,
   // update,
   // remove,
