@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  if (!req.body.title || !req.body.source || !req.body.description || !req.body.directions || !req.body.ingredients || !req.body.tags) {
+  if (!req.body.title || !req.body.source || !req.body.description || !req.body.directions || !req.body.ingredients) {
    res.status(400).json({ message: "Missing required field(s)." });
   }
   try {
@@ -30,10 +30,10 @@ router.post('/', async (req, res) => {
       step.recipe_id = added;
       Recipes.addStep(step);
     });
-
-    req.body.tags.forEach((tag) => {
-      Recipes.addRecipeTag(added, tag);
-    });
+    //
+    // req.body.tags.forEach((tag) => {
+    //   Recipes.addRecipeTag(added, tag);
+    // });
 
     res.status(200).json({ message: "It's working!" });
   } catch (err) {
@@ -111,6 +111,53 @@ router.delete('/:id', (req, res) => {
     .catch(err => {
       res.status(500).json(err);
     });
+});
+
+router.delete('/:id/ingredients/:ingred', async (req, res) => {
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    if (recipe) {
+      const removed = await Recipes.removeIngredient(req.params.id, req.params.ingred);
+      console.log(removed);
+
+      res.status(200).json({ message: "Successfully removed ingredient."});
+    } else {
+      res.status(500).json({ message: "Failed to remove ingredient." });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete('/:id/steps/:step', async (req, res) => {
+  try {
+      const removed = await Recipes.removeStep(req.params.step);
+      console.log(removed);
+      if (removed) {
+        res.status(200).json({ message: "Successfully removed step."});
+      } else {
+        res.status(400).json({ message: "There is no step with that ID." });
+      }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete('/:id/tags/:tag', async (req, res) => {
+  console.log(req.params);
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    if (recipe) {
+      const removed = await Recipes.removeRecipeTag(req.params.id, req.params.tag);
+      console.log(removed);
+
+      res.status(200).json({ message: "Successfully removed tag."});
+    } else {
+      res.status(500).json({ message: "Failed to remove tag." });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
