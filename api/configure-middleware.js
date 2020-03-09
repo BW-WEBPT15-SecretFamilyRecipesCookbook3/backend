@@ -8,11 +8,11 @@ const sessionConfig = {
 	secret: "Could be anything.",
 	cookie: {
 		maxAge: 1000 * 60 * 60,
-		secure: false, // true in production
+		secure: true, // true in production
 		httpOnly: true,
 	},
 	resave: false,
-	saveUnitialized: false, // GDPR Compliance
+	saveUninitialized: false, // GDPR Compliance
 };
 
 module.exports = server => {
